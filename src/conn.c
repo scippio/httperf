@@ -9,7 +9,7 @@
     modify it under the terms of the GNU General Public License as
     published by the Free Software Foundation; either version 2 of the
     License, or (at your option) any later version.
-    
+
     In addition, as a special exception, the copyright holders give
     permission to link the code of this work with the OpenSSL project's
     "OpenSSL" library (or with modified versions of it that use the same
@@ -27,7 +27,7 @@
 
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
     02110-1301, USA
 */
 
@@ -62,11 +62,11 @@ conn_add_servers (void)
 
 	fd = open(param.server, O_RDONLY, 0);
 	if (fd == -1)
-		panic("%s: can't open %s\n", prog_name, param.server);
+		panic("%s: can't open %s, Error: %s\n", prog_name, param.server, strerror(errno));
 
 	fstat(fd, &st);
 	if (st.st_size == 0)
-		panic("%s: file %s is empty\n", prog_name, param.server);
+		panic("%s: file %s is empty\n", prog_name, param.server, strerror(errno));
 
 	srvbase = (char *)mmap(0, st.st_size, PROT_READ, MAP_PRIVATE, fd, 0);
 	if (srvbase == (char *)-1)
